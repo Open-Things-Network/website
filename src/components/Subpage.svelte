@@ -28,7 +28,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3 text-center">
-            <img src={'subpages/'+name+'.png'}>
+            <img src={'subpages/'+name+'.png'} class="subpage_img">
         </div>
         <div class="col-md-9">
             {@html content}
@@ -45,5 +45,10 @@
     .title{
         margin-top: 4rem;
         margin-bottom: 4rem;
+    }
+    .subpage_img {
+        max-height:100px;
+        max-width:222px;
+        margin-top:8pt;
     }
 </style>

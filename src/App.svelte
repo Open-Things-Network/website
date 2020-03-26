@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
     import Navbar from "./components/Navbar.svelte";
     import Footer from "./components/Footer.svelte";
-    import Logo from "./components/Logo.svelte";
+    import Jumbotron from "./components/Jumbotron.svelte";
     import Section from "./components/Section.svelte";
     import News from "./components/News.svelte";
     import Subpage from "./components/Subpage.svelte";
@@ -71,14 +71,14 @@
 <main>
     <Navbar path={path} homePath={homePath} bind:this={navbar} language={language}/>
     {#if 'home'===pageType}
-    <Logo />
-    <Section title="O nas" icon="sections/about.png" file="sections/about.html" language={language} defaultLanguage={defaultLanguage}/>
-    <Section title="Manifest" icon="sections/manifest.png" file="sections/manifest.html" language={language} defaultLanguage={defaultLanguage}/>
-    <Section title="Cele" icon="sections/goals.png" file="sections/goals.html" language={language} defaultLanguage={defaultLanguage}/>
-    <Section title="Zadania" icon="sections/tasks.png" file="sections/tasks.html" language={language} defaultLanguage={defaultLanguage}/>
-    <Section title="Udział w projektach" icon="sections/projects.png" file="sections/projects.html" language={language} defaultLanguage={defaultLanguage}/>
-    <Section title="Dołącz do nas" icon="sections/join.png" file="sections/join.html" language={language} defaultLanguage={defaultLanguage}/>
-    <Section title="Partnerzy" icon="sections/partners.png" file="sections/partners.html" language={language} defaultLanguage={defaultLanguage}/>
+    <Jumbotron homePath={homePath}/>
+    <Section idx="0" title="O nas" icon="sections/about.png" file="sections/about.html" language={language} defaultLanguage={defaultLanguage}/>
+    <Section idx="1" title="Manifest" icon="sections/manifest.png" file="sections/manifest.html" language={language} defaultLanguage={defaultLanguage}/>
+    <Section idx="2" title="Cele" icon="sections/goals.png" file="sections/goals.html" language={language} defaultLanguage={defaultLanguage}/>
+    <Section idx="3" title="Zadania" icon="sections/tasks.png" file="sections/tasks.html" language={language} defaultLanguage={defaultLanguage}/>
+    <Section idx="4" title="Udział w projektach" icon="sections/projects.png" file="sections/projects.html" language={language} defaultLanguage={defaultLanguage}/>
+    <Section idx="5" title="Dołącz do nas" icon="sections/join.png" file="sections/join.html" language={language} defaultLanguage={defaultLanguage}/>
+    <Section idx="6" title="Partnerzy" icon="sections/partners.png" file="sections/partners.html" language={language} defaultLanguage={defaultLanguage}/>
     {:else if 'multi'===pageType}
     <News folder={folderName} language={language} defaultLanguage={defaultLanguage}/>
     {:else if 'single'===pageType}
@@ -86,6 +86,3 @@
     {/if}
     <Footer file="sections/footer.html" language={language} defaultLanguage={defaultLanguage}/>
 </main>
-
-<style>
-</style>
