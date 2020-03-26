@@ -1,0 +1,47 @@
+[
+    {
+        "url": "/test/",
+        "label": 
+                {
+                    "pl": "Start"
+                },
+        "target": ""
+    },
+    {
+        "url": "news.html",
+        "label": 
+                {
+                    "pl": "Aktualności"
+                },
+        "target": ""
+    },
+    {
+        "url": "/forum",
+        "label": 
+                {
+                    "pl": "Forum"
+                },
+        "target": "_blank"
+    },
+    {
+        "url": "files/OSR_deklaracja_członkowska.pdf",
+        "label": {
+            "pl": "Deklaracja"
+        },
+        "target": "_blank"
+    },
+    {
+        "url": "files/Regulamin_Stowarzyszenia_Otwarta_Siec_Rzeczy.pdf",
+        "label": {
+            "pl": "Regulamin"
+        },
+        "target": "_blank"
+    },
+    {
+        "url": "contact.html",
+        "label": {
+            "pl": "Kontakt"
+        },
+        "target": ""
+    }
+]

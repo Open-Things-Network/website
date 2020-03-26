@@ -1,0 +1,12 @@
+{
+    "title": {"pl":"Aktualności", "en":"News"},
+    "index":
+            [
+                {
+                    "title": "20 marca 2020",
+                    "published": "2020-03-20",
+                    "anchor": "2020-03-20",
+                    "file": "2020-03-20.html"
+                }
+            ]
+}

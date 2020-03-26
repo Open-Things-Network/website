@@ -1,0 +1,11 @@
+{
+    "contact": {
+        "title":{"pl":"Kontakt", "en":"Contact"}
+    },
+    "ttn": {
+        "title":{"pl":"The Things Network", "en":"The Things Network"}
+    },
+    "signomix": {
+        "title":{"pl":"Signomix", "en":"Signomix"}
+    }
+}
