@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         {#if !(path===homePath || path===homePath+'index.html')}
-        <img class="mr-auto" src="resources/new_w_logo_horizontal_v1.svg" alt="logo">
+        <img class="mr-auto" src="resources/new_logo_horizontal_v3.svg" alt="logo">
         {/if}
         <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

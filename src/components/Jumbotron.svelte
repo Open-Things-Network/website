@@ -5,7 +5,7 @@
 
 <div class="jumbotron" style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%,rgba(255,255,255,0.5) 100%), url({bgImgLocation})">
     <div class="container text-center">
-        <img src="resources/new_w_logo_horizontal_v1.svg" alt="logo" class = "logo_img">
+        <img src="resources/new_logo_horizontal_v3.svg" alt="logo" class = "logo_img">
     </div>
 </div>
 

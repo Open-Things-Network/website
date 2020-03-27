@@ -2,7 +2,20 @@
 <project name="osr" default="default" basedir=".">
     <description>Builds, tests, and runs the project osr.</description>
     <property name="ftpurl" value="s104.linuxpl.com"/>
-    <property name="targetfolder" value="domains/otwartasiecrzeczy.org/public_html/test"/>
+    <property name="targetfolder" value="domains/otwartasiecrzeczy.org/public_html"/>
+    <property name="targetfolder-test" value="domains/otwartasiecrzeczy.org/public_html/test"/>
+    <target name="deploy-test">
+        <input message="Login:" addproperty="user.login"/>
+        <input message="Password:" addproperty="user.password"/>
+        <ftp server="${ftpurl}"
+            remotedir="${targetfolder-test}"
+            userid="${user.login}"
+            password="${user.password}"
+            verbose="true"
+            depends="no">
+            <fileset dir="public"/>
+        </ftp>
+    </target>
     <target name="deploy">
         <input message="Login:" addproperty="user.login"/>
         <input message="Password:" addproperty="user.password"/>
