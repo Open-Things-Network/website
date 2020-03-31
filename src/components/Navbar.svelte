@@ -4,6 +4,8 @@
     export let path;
     export let homePath;
     export let language;
+    export let defaultLanguage;
+    export let cmsMode;
 
     let navlist =
             [
@@ -12,8 +14,15 @@
             ];
 
     onMount(async () => {
-        const res = await fetch(`navigation.json`);
-        navlist = await res.json();
+        //const res = await fetch(`navigation.json`);
+        //navlist = await res.json();
+        if (cmsMode) {
+            const res = await cricketDocs.getJsonFile(`navigation.json`);
+            navlist = await res;
+        }else{
+            const res = await cricketDocs.getJsonFile(`navigation.json`);
+            navlist = await res;
+        }
     });
 
 </script>

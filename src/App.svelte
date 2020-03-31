@@ -11,6 +11,7 @@
     export let defaultLanguage;
     export let devModePort;
     export let devMode = false;
+    export let cmsMode;
 
     // child components which must be binded
     let navbar;
@@ -23,7 +24,6 @@
                 content: ''
             }
 
-    let articles = [];
     let subpages = {};
     let path;
     let homePath;
@@ -42,8 +42,7 @@
         homePath = getRoot(path);
         //navbar.setHomePath(homePath);
         prefix = language === defaultLanguage ? '' : language + '_';
-        const res = await fetch(prefix + 'subpages/index.json');
-        subpages = await res.json();
+        cricketDocs.setCmsMode(cmsMode);
     });
 
     function getFolderName(pathName) {
@@ -62,14 +61,14 @@
             pos = pathName.indexOf('/', 0);
         }
         if (pos > -1) {
-            return pathName.substring(0, pos+1);
+            return pathName.substring(0, pos + 1);
         }
         return '/';
     }
 </script>
 
 <main>
-    <Navbar path={path} homePath={homePath} bind:this={navbar} language={language}/>
+    <Navbar path={path} homePath={homePath} bind:this={navbar} language={language} defaultLanguage={defaultLanguage} cmsMode={cmsMode}/>
     {#if 'home'===pageType}
     <Jumbotron homePath={homePath}/>
     <Section idx="0" title="O nas" icon="sections/about.png" file="sections/about.html" language={language} defaultLanguage={defaultLanguage}/>
@@ -80,9 +79,9 @@
     <Section idx="5" title="Dołącz do nas" icon="sections/join.png" file="sections/join.html" language={language} defaultLanguage={defaultLanguage}/>
     <Section idx="6" title="Partnerzy" icon="sections/partners.png" file="sections/partners.html" language={language} defaultLanguage={defaultLanguage}/>
     {:else if 'multi'===pageType}
-    <News folder={folderName} language={language} defaultLanguage={defaultLanguage}/>
+    <News homePath={homePath} folder={folderName} language={language} defaultLanguage={defaultLanguage} cmsMode={cmsMode}/>
     {:else if 'single'===pageType}
-    <Subpage subpages={subpages} name={folderName} language={language} defaultLanguage={defaultLanguage}/>
+    <Subpage homePath={homePath} name={folderName} language={language} defaultLanguage={defaultLanguage} cmsMode={cmsMode}/>
     {/if}
-    <Footer file="sections/footer.html" language={language} defaultLanguage={defaultLanguage}/>
+    <Footer file="sections/footer.html" language={language} defaultLanguage={defaultLanguage} cmsMode={cmsMode}/>
 </main>

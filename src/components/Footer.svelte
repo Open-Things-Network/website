@@ -4,14 +4,22 @@
     export let file;
     export let language;
     export let defaultLanguage;
-    
+    export let cmsMode;
+
     let content = '';
     let prefix;
-    
+
     onMount(async() => {
-        prefix=language===defaultLanguage?'':language+'_';
-        const res = await fetch(prefix+file);
-        content = await res.text();
+        prefix = language === defaultLanguage ? '' : language + '_';
+        let res = '';
+        if (cmsMode) {
+            //TODO
+            res = await fetch(prefix + file);
+            content = await res.text();
+        } else {
+            res = await fetch(prefix + file);
+            content = await res.text();
+        }
     });
 
 </script>

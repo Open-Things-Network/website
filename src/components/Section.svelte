@@ -19,7 +19,7 @@
 </script>
 <div style="background: {bgcolor}; padding-top: 2rem; padding-bottom: 2rem;">
     <div class="container section">
-        <center><h2><img src="{icon}" width="50px;" alt="{title}"/><br/>{title}</h2></center>
+        <center><h2><img src="{icon}" width="50px;" alt="{title}" style="margin-bottom: 1rem;"/><br/>{title}</h2></center>
         <hr>
     </div>
     <div class="container">

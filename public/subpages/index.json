@@ -7,5 +7,8 @@
     },
     "signomix": {
         "title":{"pl":"Signomix", "en":"Signomix"}
+    },
+    "legal": {
+        "title":{"pl":"Zasady i Warunki", "en":"Terms & Conditions"}
     }
 }

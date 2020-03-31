@@ -1,6 +1,6 @@
 <script>
     export let homePath;
-    export let bgImgLocation=homePath+'resources/jumbotron.png';
+    let bgImgLocation=homePath+'resources/jumbotron.png';
 </script>
 
 <div class="jumbotron" style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%,rgba(255,255,255,0.5) 100%), url({bgImgLocation})">

@@ -24,7 +24,7 @@
             userid="${user.login}"
             password="${user.password}"
             verbose="true"
-            depends="no">
+            depends="yes">
             <fileset dir="public"/>
         </ftp>
     </target>
