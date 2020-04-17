@@ -28,6 +28,9 @@
             const res = await fetch(fileLocation);
             return await res.text();
         }
+        _myLibraryObject.getDocument = async function(uri){
+            
+        }
 
         return _myLibraryObject;
     }
