@@ -1,0 +1,17 @@
+article header time{
+    color: darkgrey;
+    font-style: italic;
+    font-size: 0.8rem;
+}
+article header title{
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+article header{
+    border: 0px;
+    border-bottom: 2px;
+    border-style: solid;
+    border-color: lightgray;
+    margin-bottom: 1rem;
+}

@@ -8,8 +8,8 @@
     export let homePath;
     let prefix;
 
-    //TODO: localization & compatibility with cms
-    let config = {"title": {"pl": "aktualności", "en": "news"}, "index": []}
+    let title={"pl": "aktualności", "en": "news"}
+    let index = []
     let bgImgLocation;
     let commentDisclaimer = '%0D%0A%0D%0A' + encodeURI('Wysyłając komentarz akceptujesz warunki korzystania ze strony: https://otwartasiecrzeczy.org/legal.html');
 
@@ -22,13 +22,18 @@
         } else {
             bgImgLocation = homePath + 'resources/jumbotron.png';
         }
+        // get title for supported languages
+        const tres = await cricketDocs.getJsonFile(prefix + folder + '/title.json');
+        title = await tres;
+        // get articles
         const res = await cricketDocs.getJsonFile(prefix + folder + '/index.json');
-        config = await res;
-        for (var i = 0; i < config.index.length; i++) {
-            const c = await cricketDocs.getTextFile(prefix + folder + '/' + config.index[i].file);
-            config.index[i].content = await c;
+        index = await res;
+        for (var i = 0; i < index.length; i++) {
+            const c = await cricketDocs.getTextFile(prefix + folder + '/' + index[i].name);
+            index[i].uid=index[i].name.substring(0,index[i].name.lastIndexOf('.'))
+            index[i].content = await c;
         }
-        config = config;
+        index = index;
     });
 
     function getCommentsSize(id) {
@@ -51,9 +56,10 @@
     }
 
 </script>
-<div style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%,rgba(255,255,255,0.7) 100%), url({bgImgLocation})">
+<div
+    style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%,rgba(255,255,255,0.7) 100%), url({bgImgLocation})">
     <div class="container text-center">
-        <h1 class="title">{config.title.pl}</h1>
+        <h1 class="title">{title.pl}</h1>
     </div>
 </div>
 <div class="container">
@@ -62,23 +68,25 @@
             <img src={folder+'/icon.png'} class="subpage_img">
         </div>
         <div class="col-md-9">
-            {#each config.index as article}
+            {#each index as article}
             <div class="container">
-                <h3 class="page__main__title"><a id="{article.published}">{article.title}</a></h3>
-                <hr class="content">
+                <a id="{article.uid}"></a>
                 {@html article.content}
                 {#if homePath==='/'}
                 <hr class="comments">
                 <div class="row comments">
-                    <div class="col-6">Komentarze: {getCommentsSize(article.published)}</div>
-                    <div class="col-6 text-right">
-                        <a class="btn btn-outline-secondary" role="button" 
-                           href="mailto:comments@otwartasiecrzeczy.org?subject=ID:{article.published}&body={commentDisclaimer}" 
+                    <div class="col-4">
+                        <a class="permalink" href="#{article.uid}" onclick="prompt('Naciśnij Ctrl + C żeby skopiować odnośnik do schowka','https://otwartasiecrzeczy.org{homePath}{folder}.html#{article.uid}'); return false;"><img src="resources/link.svg"/> Link do artykułu</a>
+                    </div>
+                    <div class="col-4">Komentarze: {getCommentsSize(article.uid)}</div>
+                    <div class="col-4 text-right">
+                        <a class="btn btn-sm btn-outline-secondary" role="button" 
+                           href="mailto:comments@otwartasiecrzeczy.org?subject=ID:{article.uid}&body={commentDisclaimer}" 
                            target="_blank">Wyślij komentarz</a>
                     </div>
                 </div>
-                {#if getCommentsSize(article.published)>0}
-                {#each comments[article.published] as comment}
+                {#if getCommentsSize(article.uid)>0}
+                {#each comments[article.uid] as comment}
                 <div class="row comment-header">
                     <div class="col-12">{comment.date} <i>{comment.email}</i></div>
                 </div>
@@ -114,6 +122,12 @@
         max-height:100px;
         max-width:222px;
         margin-bottom: 2rem;
+    }
+    a.permalink{
+        color: black;
+    }
+    a.permalink:hover{
+        text-decoration: none;
     }
     div.comments{
         margin-bottom: 1rem;

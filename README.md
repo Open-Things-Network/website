@@ -13,7 +13,7 @@ Podstawowe cechy:
 * statyczny websajt - pliki mogą być serwowane przez dowolny serwer www
 * możliwość publikowania wersji testowej na tym samym serwerze www, niezależnie od wersji produkcyjnej
 
-Więcej informacji na Wiki projektu.
+Dodatkowe informacje są opisane w plikach w folderze `doc` projektu.
 
 ## Get started
 

@@ -10,7 +10,6 @@
     let title = 'title';
     let content = '';
     let prefix;
-    let subpages;
     let bgImgLocation;
 
     onMount(async () => {
@@ -22,19 +21,20 @@
             content = doc.content;
         } else {
             bgImgLocation = homePath + 'resources/jumbotron.png';
-            const res = await cricketDocs.getJsonFile(prefix + 'subpages/index.json');
-            subpages = await res;
-            const res2 = await cricketDocs.getTextFile(prefix + 'subpages/' + name + '.html');
-            content = await res2;
+            const res = await cricketDocs.getTextFile(prefix + 'subpages/' + name + '.html');
+            content = await res;
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(content, "text/html");
             try {
-                title = subpages[name].title.pl;
+                title=doc.querySelector('article header title').innerHTML;
             } catch (ex) {
                 title = name;
             }
         }
     });
 </script>
-<div style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%,rgba(255,255,255,0.7) 100%), url({bgImgLocation})">
+<div
+    style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%,rgba(255,255,255,0.7) 100%), url({bgImgLocation})">
     <div class="container text-center">
         <h1 class="title">{title}</h1>
     </div>
@@ -56,14 +56,16 @@
         border: solid 1px !important;
         height: 0px !important;
     }
-    .title{
+
+    .title {
         padding-top: 2rem;
         padding-bottom: 2rem;
         margin-bottom: 2rem;
     }
+
     .subpage_img {
-        max-height:100px;
-        max-width:222px;
+        max-height: 100px;
+        max-width: 222px;
         margin-bottom: 2rem;
     }
 </style>

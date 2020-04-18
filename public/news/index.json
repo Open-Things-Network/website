@@ -1,30 +1,14 @@
-{
-    "title": {"pl":"Aktualności", "en":"News"},
-    "index":
-            [
-                {
-                    "title": "20 marca 2020",
-                    "published": "2020-03-20",
-                    "name": "2020-03-20",
-                    "file": "2020-03-20.html"
-                },
-                {
-                    "title": "28 lutego 2020",
-                    "published": "2020-02-28",
-                    "name": "2020-02-28",
-                    "file": "2020-02-28.html"
-                },
-                {
-                    "title": "14 stycznia 2020",
-                    "published": "2020-01-14",
-                    "name": "2020-01-14",
-                    "file": "2020-01-14.html"
-                },
-                {
-                    "title": "17 grudnia 2019",
-                    "published": "2019-12-17",
-                    "name": "2019-12-17",
-                    "file": "2019-12-17.html"
-                }
-            ]
-}
+[
+    {
+        "name": "2020-03-20.html"
+    },
+    {
+        "name": "2020-02-28.html"
+    },
+    {
+        "name": "2020-01-14.html"
+    },
+    {
+        "name": "2019-12-17.html"
+    }
+]
