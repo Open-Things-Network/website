@@ -8,10 +8,10 @@
     export let homePath;
     let prefix;
 
-    let title={"pl": "aktualności", "en": "news"}
+    let config = {"title":{"pl":"","en":""}}
     let index = []
     let bgImgLocation;
-    let commentDisclaimer = '%0D%0A%0D%0A' + encodeURI('Wysyłając komentarz akceptujesz warunki korzystania ze strony: https://otwartasiecrzeczy.org/legal.html');
+    let commentDisclaimer = '';
 
     //let comments = {"2020-03-20": [{email: "x@y", date: "2020-03-21", text: "mój komentarz"}, {email: "aa@bb.cc", date: "2020-03-22", text: "mój 2 komentarz"}]};
     let comments = {};
@@ -22,15 +22,16 @@
         } else {
             bgImgLocation = homePath + 'resources/jumbotron.png';
         }
-        // get title for supported languages
-        const tres = await cricketDocs.getJsonFile(prefix + folder + '/title.json');
-        title = await tres;
+        // get news config
+        const tres = await cricketDocs.getJsonFile(prefix + folder + '/config.json');
+        config = await tres;
+        commentDisclaimer = '%0D%0A%0D%0A' + encodeURI(config.disclaimer[language]);
         // get articles
         const res = await cricketDocs.getJsonFile(prefix + folder + '/index.json');
         index = await res;
         for (var i = 0; i < index.length; i++) {
             const c = await cricketDocs.getTextFile(prefix + folder + '/' + index[i].name);
-            index[i].uid=index[i].name.substring(0,index[i].name.lastIndexOf('.'))
+            index[i].uid = index[i].name.substring(0, index[i].name.lastIndexOf('.'))
             index[i].content = await c;
         }
         index = index;
@@ -59,7 +60,7 @@
 <div
     style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%,rgba(255,255,255,0.7) 100%), url({bgImgLocation})">
     <div class="container text-center">
-        <h1 class="title">{title.pl}</h1>
+        <h1 class="title">{config.title.pl}</h1>
     </div>
 </div>
 <div class="container">
@@ -76,13 +77,17 @@
                 <hr class="comments">
                 <div class="row comments">
                     <div class="col-4">
-                        <a class="permalink" href="#{article.uid}" onclick="prompt('Naciśnij Ctrl + C żeby skopiować odnośnik do schowka','https://otwartasiecrzeczy.org{homePath}{folder}.html#{article.uid}'); return false;"><img src="resources/link.svg"/> Link do artykułu</a>
+                        <a 
+                        class="permalink" 
+                        href="#{article.uid}" 
+                        onclick="prompt('{config.prompt[language]}','{config.siteUrl}{homePath}{folder}.html#{article.uid}'); return false;"
+                        ><img src="resources/link.svg"/> {config.link[language]}</a>
                     </div>
-                    <div class="col-4">Komentarze: {getCommentsSize(article.uid)}</div>
+                    <div class="col-4">{config.comments[language]}: {getCommentsSize(article.uid)}</div>
                     <div class="col-4 text-right">
                         <a class="btn btn-sm btn-outline-secondary" role="button" 
-                           href="mailto:comments@otwartasiecrzeczy.org?subject=ID:{article.uid}&body={commentDisclaimer}" 
-                           target="_blank">Wyślij komentarz</a>
+                           href="mailto:{config.email}?subject=ID:{article.uid}&body={commentDisclaimer}" 
+                           target="_blank">{config.send[language]}</a>
                     </div>
                 </div>
                 {#if getCommentsSize(article.uid)>0}

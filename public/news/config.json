@@ -1,0 +1,28 @@
+{
+    "title": {
+        "pl": "Aktualności",
+        "en": "News"
+    },
+    "email":"comments@otwartasiecrzeczy.org",
+    "siteUrl": "https://otwartasiecrzeczy.org",
+    "disclaimer": {
+        "pl": "Wysyłając komentarz akceptujesz warunki korzystania ze strony: https://otwartasiecrzeczy.org/legal.html",
+        "en": "Wysyłając komentarz akceptujesz warunki korzystania ze strony: https://otwartasiecrzeczy.org/legal.html"
+    },
+    "prompt": {
+        "pl": "Naciśnij Ctrl + C żeby skopiować odnośnik do schowka",
+        "en": "Naciśnij Ctrl + C żeby skopiować odnośnik do schowka"
+    },
+    "link": {
+        "pl": "Link do artykułu",
+        "en": "Permalink"
+    },
+    "comments": {
+        "pl": "Komentarze",
+        "en": "Comments"
+    },
+    "send": {
+        "pl": "Wyślij komentarz",
+        "en": "Send comment"
+    }
+}
