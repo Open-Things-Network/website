@@ -1,31 +1,32 @@
 <script>
     import { onMount } from 'svelte';
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
 
     export let path;
     export let homePath;
+    export let languages;
     export let language;
     export let defaultLanguage;
-    export let cmsMode;
 
     let navlist =
     {
-        "title":"",
-        "logo":"",
-        "elements":[
-                {url: "/", label: {en: "Home", pl: "Home"}, target: ""}
+        "title": "",
+        "logo": "",
+        "elements": [
+            { url: "/", label: { en: "Home", pl: "Home" }, target: "" }
 
-            ]
+        ]
     };
     onMount(async () => {
-        if (cmsMode) {
-            const res = await cricketDocs.getJsonFile(`navigation.json`);
-            navlist = await res;
-        }else{
-            const res = await cricketDocs.getJsonFile(`navigation.json`);
-            navlist = await res;
-        }
-        document.title=navlist.title;
+        navlist =  await contentClient.getJsonFile(`navigation.json`);
+        document.title = navlist.title;
     });
+    function handleLang(x) {
+        dispatch('setLanguage', {
+            language: x
+        })
+    }
 
 </script>
 
@@ -44,7 +45,16 @@
                    href={element.url==='/'?homePath:element.url} 
                    target={element.target}>{element.label[language]}</a>
                 {/each}
+                <!--
+                {#each languages as lang}
+                {#if lang!==language}
+                    <a class="nav-item nav-link ml-auto mycolor" 
+                    on:click={() => handleLang(lang)}><img class="flag" alt={lang} src={'resources/flags/'+lang+'.svg'}></a>
+                {/if}
+                {/each}
+                -->
             </ul>
+
         </div>
     </div>
 </nav>
@@ -54,5 +64,11 @@
     }
     a.nav-item{
         font-size: large;
+    }
+    .flag{
+        width: 1.6rem; 
+        border-width: 1px; 
+        border-color: lightgray;
+        border-style: solid;
     }
 </style>

@@ -7,8 +7,7 @@ let app = new App({
         defaultLanguage: 'pl',
         languages: ['pl','en'],
         language: 'pl',
-        cmsMode: false,
-        texts: {'hello': 'Hello!',"navigation":{},"article":{}}
+        cmsMode: false
     }
 });
 

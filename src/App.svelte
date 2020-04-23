@@ -1,12 +1,13 @@
 <script>
     import { onMount } from 'svelte';
     import Navbar from "./components/Navbar.svelte";
-    import Footer from "./components/Footer.svelte";
     import Jumbotron from "./components/Jumbotron.svelte";
-    import Section from "./components/Section.svelte";
+    import Sections from "./components/Sections.svelte";
     import News from "./components/News.svelte";
     import Subpage from "./components/Subpage.svelte";
+    import Footer from "./components/Footer.svelte";
 
+    export let languages;
     export let language;
     export let defaultLanguage;
     export let devModePort;
@@ -15,21 +16,17 @@
 
     // child components which must be binded
     let navbar;
+    let news;
+    let subpage;
     let footer;
+    let sections;
 
-    let pageArticle =
-            {
-                title: '',
-                summary: '',
-                content: ''
-            }
-
-    let subpages = {};
     let path;
     let homePath;
     let pageType;
     let folderName;
-    let prefix;
+    let index = []
+    let prefix = language === defaultLanguage ? '' : language + '_';
 
     onMount(async () => {
         path = window.location.pathname;
@@ -40,9 +37,7 @@
         pageType = window.localStorage.getItem("pageType");
         folderName = getFolderName(window.location.pathname);
         homePath = getRoot(path);
-        //navbar.setHomePath(homePath);
-        prefix = language === defaultLanguage ? '' : language + '_';
-        cricketDocs.setCmsMode(cmsMode);
+        contentClient.setCmsMode(cmsMode);
     });
 
     function getFolderName(pathName) {
@@ -65,23 +60,34 @@
         }
         return '/';
     }
+    function handleSetLanguage(event) {
+        language = event.detail.language
+        prefix = language === defaultLanguage ? '' : language + '_';
+        if (typeof news !== 'undefined') {
+            news.languageChanged(language);
+        }
+        if (typeof footer !== 'undefined') {
+            footer.languageChanged(language);
+        }
+        if (typeof subpage !== 'undefined') {
+            subpage.languageChanged(language);
+        }
+        if (typeof sections !== 'undefined') {
+            sections.languageChanged(language);
+        }
+    }
 </script>
 
 <main>
-    <Navbar path={path} homePath={homePath} bind:this={navbar} language={language} defaultLanguage={defaultLanguage} cmsMode={cmsMode}/>
+    <Navbar path={path} homePath={homePath} bind:this={navbar} languages={languages} language={language}
+        defaultLanguage={defaultLanguage} on:setLanguage={handleSetLanguage} />
     {#if 'home'===pageType}
-    <Jumbotron homePath={homePath}/>
-    <Section idx="0" title="O nas" icon="sections/about.png" file="sections/about.html" language={language} defaultLanguage={defaultLanguage}/>
-    <Section idx="1" title="Manifest" icon="sections/manifest.png" file="sections/manifest.html" language={language} defaultLanguage={defaultLanguage}/>
-    <Section idx="2" title="Cele" icon="sections/goals.png" file="sections/goals.html" language={language} defaultLanguage={defaultLanguage}/>
-    <Section idx="3" title="Zadania" icon="sections/tasks.png" file="sections/tasks.html" language={language} defaultLanguage={defaultLanguage}/>
-    <Section idx="4" title="Udział w projektach" icon="sections/projects.png" file="sections/projects.html" language={language} defaultLanguage={defaultLanguage}/>
-    <Section idx="5" title="Dołącz do nas" icon="sections/join.png" file="sections/join.html" language={language} defaultLanguage={defaultLanguage}/>
-    <Section idx="6" title="Partnerzy" icon="sections/partners.png" file="sections/partners.html" language={language} defaultLanguage={defaultLanguage}/>
+        <Jumbotron homePath={homePath}/>
+        <Sections folder="sections" iconType="png" language={language} defaultLanguage={defaultLanguage} bind:this={sections}/>
     {:else if 'multi'===pageType}
-    <News homePath={homePath} folder={folderName} language={language} defaultLanguage={defaultLanguage} cmsMode={cmsMode}/>
+        <News homePath={homePath} folder={folderName} language={language} defaultLanguage={defaultLanguage} bind:this={news}/>
     {:else if 'single'===pageType}
-    <Subpage homePath={homePath} name={folderName} language={language} defaultLanguage={defaultLanguage} cmsMode={cmsMode}/>
+        <Subpage homePath={homePath} name={folderName} language={language} defaultLanguage={defaultLanguage} bind:this={subpage}/>
     {/if}
-    <Footer file="sections/footer.html" language={language} defaultLanguage={defaultLanguage} cmsMode={cmsMode}/>
+    <Footer file="sections/footer.html" language={language} defaultLanguage={defaultLanguage} bind:this={footer}/>
 </main>

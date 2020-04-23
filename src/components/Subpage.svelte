@@ -4,34 +4,31 @@
     export let name;
     export let language;
     export let defaultLanguage;
-    export let cmsMode;
     export let homePath;
 
     let title = 'title';
     let content = '';
-    let prefix;
-    let bgImgLocation;
+    let prefix = language === defaultLanguage ? '' : language + '_';
+    let bgImgLocation = homePath + 'resources/jumbotron.png';
 
     onMount(async () => {
-        prefix = language === defaultLanguage ? '' : language + '_';
-        if (cmsMode) {
-            bgImgLocation = homePath + 'resources/jumbotron.png';
-            const doc = await cricketDocs.getJsonFile(prefix + 'subpages/' + name + '.html');
-            title = doc.title;
-            content = doc.content;
-        } else {
-            bgImgLocation = homePath + 'resources/jumbotron.png';
-            const res = await cricketDocs.getTextFile(prefix + 'subpages/' + name + '.html');
-            content = await res;
-            var parser = new DOMParser();
-            var doc = parser.parseFromString(content, "text/html");
-            try {
-                title=doc.querySelector('article header title').innerHTML;
-            } catch (ex) {
-                title = name;
-            }
-        }
+        loadContent();
     });
+    async function loadContent() {
+        content = await contentClient.getTextFile(prefix + 'subpages/' + name + '.html');
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(content, "text/html");
+        try {
+            title = doc.querySelector('article header title').innerHTML;
+        } catch (ex) {
+            title = name;
+        }
+    }
+    export function languageChanged(newLanguage) {
+        language = newLanguage;
+        prefix = language === defaultLanguage ? '' : language + '_';
+        loadContent();
+    }
 </script>
 <div
     style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%,rgba(255,255,255,0.7) 100%), url({bgImgLocation})">

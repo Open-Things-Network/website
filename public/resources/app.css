@@ -15,3 +15,7 @@ article header{
     border-color: lightgray;
     margin-bottom: 1rem;
 }
+article header.section{
+    display: none;
+}
+

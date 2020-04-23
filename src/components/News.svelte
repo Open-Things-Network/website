@@ -3,95 +3,134 @@
 
     export let folder;
     export let language;
-    export let defaultLanguage;
-    export let cmsMode; // for next version - not used now     
+    export let defaultLanguage;  
     export let homePath;
-    let prefix;
+    let prefix = language === defaultLanguage ? '' : language + '_';
 
-    let config = {"title":{"pl":"","en":""}}
-    let index = []
+    let config = {
+        "title": {
+            "pl": "",
+            "en": ""
+        },
+        "email": "",
+        "siteUrl": "",
+        "disclaimer": {
+            "pl": "",
+            "en": ""
+        },
+        "prompt": {
+            "pl": "",
+            "en": ""
+        },
+        "link": {
+            "pl": "",
+            "en": ""
+        },
+        "comments": {
+            "pl": "",
+            "en": ""
+        },
+        "send": {
+            "pl": "",
+            "en": ""
+        }
+    }
+    let index = [{ "uid": "", "name": "", "isComment": false, "comments": [] }]
     let bgImgLocation;
     let commentDisclaimer = '';
+    // commentsForOneArticle = [{email: "x@y", date: "2020-03-21", text: "mój komentarz"}, {email: "aa@bb.cc", date: "2020-03-22", text: "mój 2 komentarz"}];
 
-    //let comments = {"2020-03-20": [{email: "x@y", date: "2020-03-21", text: "mój komentarz"}, {email: "aa@bb.cc", date: "2020-03-22", text: "mój 2 komentarz"}]};
-    let comments = {};
     onMount(async () => {
-        prefix = language === defaultLanguage ? '' : language + '_';
-        if (cmsMode) {
+        //if (cmsMode) {
             bgImgLocation = homePath + 'resources/jumbotron.png';
-        } else {
-            bgImgLocation = homePath + 'resources/jumbotron.png';
-        }
+        //} else {
+        //    bgImgLocation = homePath + 'resources/jumbotron.png';
+        //}
+        loadContent()
+    });
+    async function loadContent() {
         // get news config
-        const tres = await cricketDocs.getJsonFile(prefix + folder + '/config.json');
-        config = await tres;
+        try {
+            config = await contentClient.getJsonFile(prefix + folder + '/config.json');
+        } catch (err) {
+            index = []
+            return
+        }
         commentDisclaimer = '%0D%0A%0D%0A' + encodeURI(config.disclaimer[language]);
         // get articles
-        const res = await cricketDocs.getJsonFile(prefix + folder + '/index.json');
-        index = await res;
+        try {
+            index = await contentClient.getJsonFile(prefix + folder + '/index.json');
+        } catch (err) {
+            index = []
+        }
+        let cnt;
+        let cmt;
         for (var i = 0; i < index.length; i++) {
-            const c = await cricketDocs.getTextFile(prefix + folder + '/' + index[i].name);
+            //cnt = await contentClient.getTextFile(prefix + folder + '/' + index[i].name);
             index[i].uid = index[i].name.substring(0, index[i].name.lastIndexOf('.'))
-            index[i].content = await c;
+            //index[i].content = await cnt;
+            index[i].content = await contentClient.getTextFile(prefix + folder + '/' + index[i].name);
+            if (index[i].isComment) {
+                //cmt = await contentClient.getJsonFile(prefix + folder + '/' + index[i].uid + '.json');
+                //index[i].comments = await cmt;
+                index[i].comments = await contentClient.getJsonFile(prefix + folder + '/' + index[i].uid + '.json');
+            } else {
+                index[i].comments = [];
+            }
+            //console.log(index[i].comments)
         }
         index = index;
-    });
-
-    function getCommentsSize(id) {
-        const cList = comments[id]
-        if (typeof cList !== 'undefined' && typeof cList !== null) {
-            return cList.length;
-        } else {
-            return 0;
-        }
     }
+    function getLength(arr) {
+        let l = 0;
+        try {
+            l = arr.length;
+        } catch{
 
-    function getComments(id) {
-        console.log("getComments " + id);
-        const cList = comments[id]
-        if (typeof cList !== 'undefined' && typeof cList !== null) {
-            return cList;
-        } else {
-            return [];
         }
+        return l;
     }
-
+    export function languageChanged(newLanguage) {
+        language = newLanguage;
+        prefix = language === defaultLanguage ? '' : language + '_';
+        loadContent();
+    }
 </script>
 <div
     style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%,rgba(255,255,255,0.7) 100%), url({bgImgLocation})">
     <div class="container text-center">
-        <h1 class="title">{config.title.pl}</h1>
+        <h1 class="title">{config.title[language]}</h1>
     </div>
 </div>
 <div class="container">
     <div class="row">
         <div class="col-md-3 text-center">
-            <img src={folder+'/icon.png'} class="subpage_img">
+            <img src={prefix+folder+'/icon.png'} class="subpage_img">
         </div>
         <div class="col-md-9">
-            {#each index as article}
+            {#each index as {uid, name, content, comments}, idx}
             <div class="container">
-                <a id="{article.uid}"></a>
-                {@html article.content}
+                <a id="{uid}"></a>
+                {@html content}
                 {#if homePath==='/'}
                 <hr class="comments">
                 <div class="row comments">
                     <div class="col-4">
                         <a 
                         class="permalink" 
-                        href="#{article.uid}" 
-                        onclick="prompt('{config.prompt[language]}','{config.siteUrl}{homePath}{folder}.html#{article.uid}'); return false;"
+                        href="#{uid}" 
+                        onclick="prompt('{config.prompt[language]}','{config.siteUrl}{homePath}{folder}.html#{uid}'); return false;"
                         ><img src="resources/link.svg"/> {config.link[language]}</a>
                     </div>
-                    <div class="col-4">{config.comments[language]}: {getCommentsSize(article.uid)}</div>
+                    <div class="col-4">{config.comments[language]}: {getLength(comments)}</div>
                     <div class="col-4 text-right">
                         <a class="btn btn-sm btn-outline-secondary" role="button" 
-                           href="mailto:{config.email}?subject=ID:{article.uid}&body={commentDisclaimer}" 
+                           href="mailto:{config.email}?subject=ID:{uid}&body={commentDisclaimer}" 
                            target="_blank">{config.send[language]}</a>
                     </div>
                 </div>
-                {#if getCommentsSize(article.uid)>0}
-                {#each comments[article.uid] as comment}
+                {#if getLength(comments)>0}
+                {#each comments as comment}
                 <div class="row comment-header">
                     <div class="col-12">{comment.date} <i>{comment.email}</i></div>
                 </div>
@@ -108,11 +147,6 @@
 </div>
 
 <style>
-    hr.content {
-        color: lightgray !important;
-        border: solid 1px !important;
-        height: 0px !important;
-    }
     hr.comments {
         color: lightgray !important;
         border: dotted 1px !important;
