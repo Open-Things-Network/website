@@ -3,7 +3,7 @@
 
     export let folder;
     export let language;
-    export let defaultLanguage;  
+    export let defaultLanguage;
     export let homePath;
     let prefix = language === defaultLanguage ? '' : language + '_';
 
@@ -41,11 +41,7 @@
     // commentsForOneArticle = [{email: "x@y", date: "2020-03-21", text: "mój komentarz"}, {email: "aa@bb.cc", date: "2020-03-22", text: "mój 2 komentarz"}];
 
     onMount(async () => {
-        //if (cmsMode) {
-            bgImgLocation = homePath + 'resources/jumbotron.png';
-        //} else {
-        //    bgImgLocation = homePath + 'resources/jumbotron.png';
-        //}
+        bgImgLocation = homePath + 'resources/jumbotron.png';
         loadContent()
     });
     async function loadContent() {
@@ -66,18 +62,13 @@
         let cnt;
         let cmt;
         for (var i = 0; i < index.length; i++) {
-            //cnt = await contentClient.getTextFile(prefix + folder + '/' + index[i].name);
             index[i].uid = index[i].name.substring(0, index[i].name.lastIndexOf('.'))
-            //index[i].content = await cnt;
             index[i].content = await contentClient.getTextFile(prefix + folder + '/' + index[i].name);
             if (index[i].isComment) {
-                //cmt = await contentClient.getJsonFile(prefix + folder + '/' + index[i].uid + '.json');
-                //index[i].comments = await cmt;
                 index[i].comments = await contentClient.getJsonFile(prefix + folder + '/' + index[i].uid + '.json');
             } else {
                 index[i].comments = [];
             }
-            //console.log(index[i].comments)
         }
         index = index;
     }

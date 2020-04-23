@@ -3,7 +3,9 @@
 * Jak skonfigurować menu?
 * Jak dodać artykuł do strony Aktualności?
 * Jak dodać nową podstronę z pojedynczym tekstem?
-* Jak dodać nową podstronę z listą artykułów
+* Jak dodać nową podstronę z listą artykułów?
+* Jak włączyć obsługę wersji językowych?
+* Jak działa zapamiętywanie wybranej wersji językowej?
 * Jak zmienić layout lub sposób działania websajtu?
 
 ## Jak skonfigurować menu?
@@ -94,10 +96,10 @@ Ad 2) Nazwa pliku dodana do `index.json`:
 ```
 [
     {
-        "name": "2020-03-20.html"
+        "name": "2020-03-20.html", "isComment":false
     },
     {
-        "name": "2020-02-28.html"
+        "name": "2020-02-28.html", "isComment":true
     }
 ]
 ```
@@ -118,9 +120,26 @@ Jeśli chcemy np. dodać podstronę `blog`
 1. Kopiujemy zawartość pliku `news.html` do pliku o nazwie `blog.html`
 2. Tworzymy folder `blog`
 3. Tworzymy folder `blog_images`
-4. W folderze `blog` tworzymy pliki `title.json`, `index.json` i dodajemy `icon.png` (analogicznie do plików w podfolderze `news`).
+4. W folderze `blog` tworzymy pliki `config.json`, `index.json` i dodajemy `icon.png` (analogicznie do plików w podfolderze `news`).
 
 Podstrona będzie dostępna pod adresem `blog.html`
+
+## Jak włączyć obsługę wersji językowych?
+
+Włączenie wersji językowych wymaga skonfigurowania ich w pliku `main.js`.
+
+* Angielskie sekcje strony głównej muszą być w folderze `en_sections`
+* Angielskie artykuły muszą być w folderze `en_news`
+* Angielskie podstrony muszą być w folderze `en_subpages`
+* Jeśli dodaliśmy kolejną podstronę z listą artykułów np. w folderze `blog`, to jej angielskie artykuły muszą być w folderze z prefiksem `en_` np. `en_blog`.
+
+## Jak działa zapamiętywanie wybranej wersji językowej?
+
+TODO
+
+Wybranie wersji językowej (poprzez kliknięcie flagi w menu) powoduje zapisanie nazwy wybranego języka
+w `local storage`. Dzięki temu wybór będzie stosowany przy przechodzeniu pomiędzy podstronami websajtu,
+jak również przy ponownym wejściu na websajt.
 
 ## Jak zmienić layout lub sposób działania websajtu?
 

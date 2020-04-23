@@ -34,12 +34,36 @@ Treści oraz ikony poszczególnych sekcji znajdują się w folderze `sections`.
 
 Konfiguracja tytyłu strony, indeks artykułów, ikona strony oraz treści poszczegółnych artykułów znajdują się w folderze `news`.
 
-Przykładowy plik `title.json`
+Przykładowy plik `config.json`
 
 ```
 {
-    "pl": "Aktualności",
-    "en": "News"
+    "title": {
+        "pl": "Aktualności",
+        "en": "News"
+    },
+    "email":"comments@otwartasiecrzeczy.org",
+    "siteUrl": "https://otwartasiecrzeczy.org",
+    "disclaimer": {
+        "pl": "Wysyłając komentarz akceptujesz warunki korzystania ze strony: https://otwartasiecrzeczy.org/legal.html",
+        "en": "Wysyłając komentarz akceptujesz warunki korzystania ze strony: https://otwartasiecrzeczy.org/legal.html"
+    },
+    "prompt": {
+        "pl": "Naciśnij Ctrl + C żeby skopiować odnośnik do schowka",
+        "en": "Naciśnij Ctrl + C żeby skopiować odnośnik do schowka"
+    },
+    "link": {
+        "pl": "Link do artykułu",
+        "en": "Permalink"
+    },
+    "comments": {
+        "pl": "Komentarze",
+        "en": "Comments"
+    },
+    "send": {
+        "pl": "Wyślij komentarz",
+        "en": "Send comment"
+    }
 }
 ```
 
@@ -48,10 +72,10 @@ Przykładowy plik `index.json`
 ```
 [
     {
-        "name": "2020-03-01.html"
+        "name": "2020-03-01.html", "isComment":false
     },
     {
-        "name": "2020-02-28.html"
+        "name": "2020-02-28.html", "isComment":true
     }
 ]
 ```

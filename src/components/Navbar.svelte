@@ -45,14 +45,14 @@
                    href={element.url==='/'?homePath:element.url} 
                    target={element.target}>{element.label[language]}</a>
                 {/each}
-                <!--
+                {#if languages.length>1}
                 {#each languages as lang}
                 {#if lang!==language}
                     <a class="nav-item nav-link ml-auto mycolor" 
                     on:click={() => handleLang(lang)}><img class="flag" alt={lang} src={'resources/flags/'+lang+'.svg'}></a>
                 {/if}
                 {/each}
-                -->
+                {/if}
             </ul>
 
         </div>
