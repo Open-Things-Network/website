@@ -27,6 +27,11 @@
     let folderName;
     let index = []
     let prefix = language === defaultLanguage ? '' : language + '_';
+    if (languages.length>1 && "" !== window.localStorage.getItem("language")) {
+        language = window.localStorage.getItem("language");
+        prefix = language === defaultLanguage ? '' : language + '_';
+        console.log("language:[" + language + "]")
+    }
 
     onMount(async () => {
         path = window.location.pathname;
@@ -63,6 +68,7 @@
     function handleSetLanguage(event) {
         language = event.detail.language
         prefix = language === defaultLanguage ? '' : language + '_';
+        window.localStorage.setItem("language", language);
         if (typeof news !== 'undefined') {
             news.languageChanged(language);
         }

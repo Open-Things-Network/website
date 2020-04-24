@@ -135,11 +135,10 @@ Włączenie wersji językowych wymaga skonfigurowania ich w pliku `main.js`.
 
 ## Jak działa zapamiętywanie wybranej wersji językowej?
 
-TODO
+Jeśli obsługa wersji językowych jest włączona, to:
 
-Wybranie wersji językowej (poprzez kliknięcie flagi w menu) powoduje zapisanie nazwy wybranego języka
-w `local storage`. Dzięki temu wybór będzie stosowany przy przechodzeniu pomiędzy podstronami websajtu,
-jak również przy ponownym wejściu na websajt.
+* kiedy wybierzemy język poprzez kliknięcie flagi w menu, symbol wybranego języka jest zapisywany w `localStorage` przeglądarki,
+* przy kolejnych odwiedzinach websajtu wybrany język będzie ustawiany automatycznie.
 
 ## Jak zmienić layout lub sposób działania websajtu?
 

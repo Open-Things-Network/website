@@ -21,7 +21,7 @@
             index = []
         }
         var parser = new DOMParser();
-        for (var i = 0; i < index.length; i++) {   
+        for (var i = 0; i < index.length; i++) {
             index[i].content = await contentClient.getTextFile(prefix + folder + '/' + index[i].name);
             index[i].icon = prefix + folder + '/' + index[i].name.substring(0, index[i].name.lastIndexOf('.')) + '.' + iconType;
             var doc = parser.parseFromString(index[i].content, "text/html");
@@ -39,8 +39,8 @@
     }
 </script>
 {#each index as {name, title, content, icon}, idx}
-<div style="background: {bgcolor}; padding-top: 2rem; padding-bottom: 2rem;">
-    <div class="container section">
+<div class="section" style="padding-top: 2rem; padding-bottom: 2rem;">
+    <div class="container">
         <center>
             <h2><img src="{icon}" width="50px;" alt="{title}" style="margin-bottom: 1rem;" /><br />{title}</h2>
         </center>
@@ -56,5 +56,8 @@
         color: lightgray !important;
         border: solid 1px !important;
         height: 0px !important;
+    }
+    .section:nth-child(even) {
+        background-color: #F8F8F8;
     }
 </style>
