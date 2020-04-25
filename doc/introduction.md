@@ -4,12 +4,13 @@
 
 1. Możliwość zastosowania w wersji całkowicie statycznej bez konieczności przetwarzania po stronie serwera.
 2. Rozdzielenie treści od stylów i mechaniki stron.
-    * Menu
-    * Podział websajtu na strony
-    * Typy stron
-    * Stopka
 3. Możliwość publikowania wersji testowej i produkcyjnej
-3. Obsługa wersji językowych
+4. Obsługa wersji językowych
+5. Typy stron:
+   * strona główna
+   * lista artykułów
+   * podstrona
+6. Komentarze do artykułów
 
 ## Wersja statyczna
 
@@ -25,7 +26,7 @@ Do opisania
 
 ## Wersje językowe
 
-Do zaimplementowania
+Do opisania
 
 ## Wersja dynamiczna
 
