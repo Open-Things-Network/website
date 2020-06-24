@@ -5,8 +5,8 @@ let app = new App({
     props: {
         devModePort: '5000',
         defaultLanguage: 'pl',
-        languages: ['pl'], 
-        //languages:['pl','en'],
+        //languages: ['pl'], 
+        languages:['pl','en'],
         language: 'pl',
         cmsMode: false
     }
