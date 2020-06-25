@@ -7,7 +7,7 @@
     import Subpage from "./components/Subpage.svelte";
     import Footer from "./components/Footer.svelte";
 
-    export let languages;
+    export let languages=[];
     export let language;
     export let defaultLanguage;
     export let devModePort;
@@ -25,16 +25,33 @@
     let homePath;
     let pageType;
     let folderName;
+    let queryLanguage;
     let index = []
+    if(language==null || language==undefined){
+        language=defaultLanguage;
+    }
     let prefix = language === defaultLanguage ? '' : language + '_';
     if (languages.length>1 && "" !== window.localStorage.getItem("language")) {
         language = window.localStorage.getItem("language");
         prefix = language === defaultLanguage ? '' : language + '_';
-        console.log("language:[" + language + "]")
+        console.log("language:[" + language + "]");
     }
 
     onMount(async () => {
         path = window.location.pathname;
+        queryLanguage = window.location.search
+        if(queryLanguage.indexOf('?lang=')>-1){
+            queryLanguage=queryLanguage.substring(queryLanguage.indexOf('?lang=')+6);
+            if(queryLanguage.indexOf('&')>0){
+                queryLanguage=queryLanguage.substring(0,queryLanguage.indexOf('&'));
+            }
+        }
+        if(queryLanguage.length>0 && languages.includes(queryLanguage)){
+            language=queryLanguage
+            prefix = language === defaultLanguage ? '' : language + '_';
+        }
+        console.log("queryLanguage:"+queryLanguage);
+        console.log("language:" + language);
         devMode = window.origin.endsWith(':' + devModePort);
         if (!devMode && window.location.hostname !== 'localhost' && window.location.protocol !== "https:") {
             window.location.protocol = "https:";

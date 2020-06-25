@@ -19,26 +19,18 @@
             "target": ""
         },
         {
+            "url": "resources.html",
+            "label": {
+                "pl": "Informacje",
+                "en": "Resources"
+            },
+            "target": ""
+        },
+        {
             "url": "/forum",
             "label": {
                 "pl": "Forum",
                 "en": "Forum"
-            },
-            "target": "_blank"
-        },
-        {
-            "url": "files/OSR_deklaracja_członkowska.pdf",
-            "label": {
-                "pl": "Deklaracja",
-                "en": "Declaration"
-            },
-            "target": "_blank"
-        },
-        {
-            "url": "files/Regulamin_Stowarzyszenia_Otwarta_Siec_Rzeczy.pdf",
-            "label": {
-                "pl": "Regulamin",
-                "en": "Rules"
             },
             "target": "_blank"
         },

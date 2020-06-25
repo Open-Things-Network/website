@@ -111,7 +111,7 @@
                         class="permalink" 
                         href="#{uid}" 
                         onclick="prompt('{config.prompt[language]}','{config.siteUrl}{homePath}{folder}.html#{uid}'); return false;"
-                        ><img src="resources/link.svg"/> {config.link[language]}</a>
+                        ><img src="/resources/link.svg"/> {config.link[language]}</a>
                     </div>
                     <div class="col-4">{config.comments[language]}: {getLength(comments)}</div>
                     <div class="col-4 text-right">
