@@ -27,9 +27,6 @@
     let folderName;
     let queryLanguage;
     let index = []
-    if(language==null || language==undefined){
-        language=defaultLanguage;
-    }
     let prefix = language === defaultLanguage ? '' : language + '_';
     if (languages.length>1 && "" !== window.localStorage.getItem("language")) {
         language = window.localStorage.getItem("language");
