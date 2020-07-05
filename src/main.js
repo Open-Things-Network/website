@@ -7,6 +7,7 @@ let app = new App({
         defaultLanguage: 'pl',
         languages:['pl','en'],
         language: 'pl',
+        syntax: 'html',
         cmsMode: false
     }
 });

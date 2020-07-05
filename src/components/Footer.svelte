@@ -24,14 +24,14 @@
 </script>
 <div class='jumbotron ft'>
     <div class='container'>
-        <div class="row">
+        <div class="row" style="padding-top: 1rem; padding-bottom: 1rem;">
             {@html content}
         </div>
     </div>
 </div>
 <style>
     .ft {
-        margin-top: 4rem;
+        margin-top: 2rem;
         background-color: #404040;
         color: whitesmoke;
     }

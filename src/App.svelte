@@ -5,14 +5,16 @@
     import Sections from "./components/Sections.svelte";
     import News from "./components/News.svelte";
     import Subpage from "./components/Subpage.svelte";
+    import SubpageMd from "./components/SubpageMd.svelte";
     import Footer from "./components/Footer.svelte";
 
-    export let languages=[];
+    export let languages = [];
     export let language;
     export let defaultLanguage;
     export let devModePort;
     export let devMode = false;
     export let cmsMode;
+    export let syntax;
 
     // child components which must be binded
     let navbar;
@@ -28,7 +30,7 @@
     let queryLanguage;
     let index = []
     let prefix = language === defaultLanguage ? '' : language + '_';
-    if (languages.length>1 && "" !== window.localStorage.getItem("language")) {
+    if (languages.length > 1 && "" !== window.localStorage.getItem("language")) {
         language = window.localStorage.getItem("language");
         prefix = language === defaultLanguage ? '' : language + '_';
         console.log("language:[" + language + "]");
@@ -37,17 +39,17 @@
     onMount(async () => {
         path = window.location.pathname;
         queryLanguage = window.location.search
-        if(queryLanguage.indexOf('?lang=')>-1){
-            queryLanguage=queryLanguage.substring(queryLanguage.indexOf('?lang=')+6);
-            if(queryLanguage.indexOf('&')>0){
-                queryLanguage=queryLanguage.substring(0,queryLanguage.indexOf('&'));
+        if (queryLanguage.indexOf('?lang=') > -1) {
+            queryLanguage = queryLanguage.substring(queryLanguage.indexOf('?lang=') + 6);
+            if (queryLanguage.indexOf('&') > 0) {
+                queryLanguage = queryLanguage.substring(0, queryLanguage.indexOf('&'));
             }
         }
-        if(queryLanguage.length>0 && languages.includes(queryLanguage)){
-            language=queryLanguage
+        if (queryLanguage.length > 0 && languages.includes(queryLanguage)) {
+            language = queryLanguage
             prefix = language === defaultLanguage ? '' : language + '_';
         }
-        console.log("queryLanguage:"+queryLanguage);
+        console.log("queryLanguage:" + queryLanguage);
         console.log("language:" + language);
         devMode = window.origin.endsWith(':' + devModePort);
         if (!devMode && window.location.hostname !== 'localhost' && window.location.protocol !== "https:") {
@@ -106,8 +108,10 @@
         <Sections folder="sections" iconType="png" language={language} defaultLanguage={defaultLanguage} bind:this={sections}/>
     {:else if 'multi'===pageType}
         <News homePath={homePath} folder={folderName} language={language} defaultLanguage={defaultLanguage} bind:this={news}/>
-    {:else if 'single'===pageType}
+    {:else if ('single.html'===pageType || 'single'===pageType && syntax==='html') }
         <Subpage homePath={homePath} name={folderName} language={language} defaultLanguage={defaultLanguage} bind:this={subpage}/>
+    {:else if ('single.md'===pageType || 'single'===pageType && syntax==='md')}
+        <SubpageMd homePath={homePath} name={folderName} language={language} defaultLanguage={defaultLanguage} bind:this={subpage}/>
     {/if}
     <Footer file="sections/footer.html" language={language} defaultLanguage={defaultLanguage} bind:this={footer}/>
 </main>

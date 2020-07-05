@@ -12,6 +12,7 @@ Podstawowe cechy:
 * lokalizacja - wybór wersji językowej i wyświetlanie treści na podstawie wybranej wersji językowej
 * statyczny websajt - pliki mogą być serwowane przez dowolny serwer www
 * możliwość publikowania wersji testowej na tym samym serwerze www, niezależnie od wersji produkcyjnej
+* treści tworzone w HTML lub w Markdown
 
 Dodatkowe informacje są opisane w plikach w folderze `doc` projektu.
 
