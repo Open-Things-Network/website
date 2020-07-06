@@ -29,12 +29,14 @@
     let folderName;
     let queryLanguage;
     let index = []
-    let prefix = language === defaultLanguage ? '' : language + '_';
-    if (languages.length > 1 && "" !== window.localStorage.getItem("language")) {
-        language = window.localStorage.getItem("language");
-        prefix = language === defaultLanguage ? '' : language + '_';
-        console.log("language:[" + language + "]");
+    let prefix; // = language === defaultLanguage ? '' : language + '_';
+    let tmpLang= window.localStorage.getItem("language");
+    if (languages.length > 1 && "" != tmpLang && "null" != tmpLang && undefined!=tmpLang) {
+        language = tmpLang;
+    }else{
+        language = defaultLanguage;
     }
+    prefix = language === defaultLanguage ? '' : language + '_';
 
     onMount(async () => {
         path = window.location.pathname;
