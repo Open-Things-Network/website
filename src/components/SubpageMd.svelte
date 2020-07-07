@@ -11,7 +11,7 @@
     let content = '';
     let prefix = language === defaultLanguage ? '' : language + '_';
     let bgImgLocation = homePath + 'resources/jumbotron.png';
-    let converter = new showdown.Converter({ tables: true });
+    let converter = new showdown.Converter({ tables: true, extensions: ['bootstrap'] });
 
     onMount(async () => {
         loadContent();

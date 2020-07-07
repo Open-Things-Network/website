@@ -12,5 +12,5 @@ kod źródłowy
 [github](https://github.com)
 
 |ID|Name|Opis|
-|---|---|---|
+|---:|---|---|
 |1|nazwa 1| opis 1|
