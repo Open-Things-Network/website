@@ -1,16 +1,17 @@
 # Strona webowa Stowarzyszenia Otwarta Sieć Rzeczy
 
-Websajt statyczny zbudowany z wykorzystaniem Bootstrapa oraz Svelte.
+Websajt zbudowany z wykorzystaniem Bootstrapa oraz Svelte.
 
 Podstawowe cechy:
 
+* statyczny websajt - pliki mogą być serwowane przez dowolny serwer www
+* możliwość dostarczania treści websajtu przy pomocy headless CMS
 * oddzelenie treści od logiki websajtu oraz layoutu.
 * konfigurowalne menu
 * konfigurowalne sekcje strony głównej
 * podstrony z listą artykułów
 * podstrony z pojedynczym artykułem
 * lokalizacja - wybór wersji językowej i wyświetlanie treści na podstawie wybranej wersji językowej
-* statyczny websajt - pliki mogą być serwowane przez dowolny serwer www
 * możliwość publikowania wersji testowej na tym samym serwerze www, niezależnie od wersji produkcyjnej
 * treści tworzone w HTML lub w Markdown
 

@@ -8,7 +8,7 @@
 
     let title = 'title';
     let content = '';
-    let prefix = language === defaultLanguage ? '' : language + '_';
+    let prefix = 'content/'+(language === defaultLanguage ? '' : language + '_');
     let bgImgLocation = homePath + 'resources/jumbotron.png';
 
     onMount(async () => {
@@ -26,7 +26,7 @@
     }
     export function languageChanged(newLanguage) {
         language = newLanguage;
-        prefix = language === defaultLanguage ? '' : language + '_';
+        prefix = 'content/'+(language === defaultLanguage ? '' : language + '_');
         loadContent();
     }
 </script>
@@ -39,7 +39,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3 text-center">
-            <img src={'subpages/'+name+'.png'} class="subpage_img">
+            <img src={'content/subpages/'+name+'.png'} class="subpage_img">
         </div>
         <div class="col-md-9">
             {@html content}

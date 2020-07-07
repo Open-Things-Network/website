@@ -5,7 +5,7 @@
     export let language;
     export let defaultLanguage;
     export let homePath;
-    let prefix = language === defaultLanguage ? '' : language + '_';
+    let prefix = 'content/'+(language === defaultLanguage ? '' : language + '_');
 
     let config = {
         "title": {
@@ -83,7 +83,7 @@
     }
     export function languageChanged(newLanguage) {
         language = newLanguage;
-        prefix = language === defaultLanguage ? '' : language + '_';
+        prefix = 'content/'+(language === defaultLanguage ? '' : language + '_');
         loadContent();
     }
 </script>
