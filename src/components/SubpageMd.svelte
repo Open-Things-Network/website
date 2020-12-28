@@ -6,12 +6,30 @@
     export let defaultLanguage;
     export let homePath;
 
+    const classMap = {
+        table: 'table-bordered table-sm',
+        blockquote: 'blockquote'
+    }
+    const bindings = Object.keys(classMap)
+            .map(key => ({
+                    type: 'output',
+                    regex: new RegExp(`<${key}(.*)>`, 'g'),
+                    replace: `<${key} class="${classMap[key]}" $1>`
+                }));
+
     let title = 'title';
     let published = '';
     let content = '';
-    let prefix = 'content/'+(language === defaultLanguage ? '' : language + '_');
+    let prefix = 'content/' + (language === defaultLanguage ? '' : language + '_');
     let bgImgLocation = homePath + 'resources/jumbotron.png';
-    let converter = new showdown.Converter({ tables: true, extensions: ['bootstrap'] });
+    let converter = new showdown.Converter(
+            {
+                tables: true,
+                simpleLineBreaks: true,
+                simplifiedAutoLink: true,
+                extensions: [...bindings]
+            }
+    );
 
     onMount(async () => {
         loadContent();
@@ -21,7 +39,7 @@
         if (content.startsWith('# ')) {
             title = content.substring(2, content.indexOf('## '))
             if (title.indexOf('//') > 0) {
-                published=title.substring(title.indexOf('//')+2).trim()
+                published = title.substring(title.indexOf('//') + 2).trim()
                 title = title.substring(0, title.indexOf('//')).trim()
             }
             content = content.substring(content.indexOf('## '))
@@ -30,7 +48,7 @@
     }
     export function languageChanged(newLanguage) {
         language = newLanguage;
-        prefix = 'content/'+(language === defaultLanguage ? '' : language + '_');
+        prefix = 'content/' + (language === defaultLanguage ? '' : language + '_');
         loadContent();
     }
 </script>

@@ -19,6 +19,14 @@
             "target": ""
         },
         {
+            "url": "projects.html",
+            "label": {
+                "pl": "Projekty",
+                "en": "Projects"
+            },
+            "target": ""
+        },
+        {
             "url": "resources.html",
             "label": {
                 "pl": "Informacje",
@@ -32,7 +40,7 @@
                 "pl": "BBO",
                 "en": "BBO"
             },
-            "target": "_blank"
+            "target": ""
         },
         {
             "url": "contact.html",
