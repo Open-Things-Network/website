@@ -3,10 +3,10 @@
 
 ## Wstęp
 
-Informacje zawarte na tej stronie są gromadzoane i udostępniane przez stowarzyszenie Otwarta Sieć Rzeczy
+Informacje zawarte na tej stronie są gromadzone i udostępniane przez stowarzyszenie Otwarta Sieć Rzeczy
 nieodpłatnie i w dobrej wierze, że mogą być dla kogoś przydatne.
 
->Jeśli zauważysz tu jakiekolwiek błedy lub uważasz, że jakaś firma lub organizacja powinna się znaleźć na tej stronie lub, to skontaktuj się z nami
+>Jeśli zauważysz tu jakiekolwiek błędy lub uważasz, że jakaś firma lub organizacja powinny znaleźć się na tej stronie, to skontaktuj się z nami.
 
 ## Uczelnie i organizacje
 
