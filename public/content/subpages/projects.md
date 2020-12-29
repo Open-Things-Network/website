@@ -6,7 +6,7 @@
 Stowarzyszenie w ramach swojej statutowej działalności prowadzi szereg projektów.
 
 |Projekt|Status|Kanał dyskusyjny na Discord|
-|---|---|
+|---|---|---|
 |**LoRa developer board**| zrealizowany|
 |**LoRa developer board v2**|w trakcie|
 |**LoRa tracker** | zrealizowany|
