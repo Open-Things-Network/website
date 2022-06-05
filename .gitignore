@@ -1,3 +1,7 @@
 /node_modules/
 /nbproject/
 /public/build/
+public/build/bundle.css.map
+public/build/bundle.css.map
+public/build/bundle.js
+public/build/bundle.js.map
